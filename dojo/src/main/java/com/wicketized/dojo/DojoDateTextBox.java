@@ -69,11 +69,6 @@ public class DojoDateTextBox extends DojoFormMarkup<DojoDateTextBox> {
     super.onComponentTag(tag);
   }
 
-  public DojoDateTextBox setDefaultModel (IModel<DateMidnight> model) {
-
-    return (DojoDateTextBox)super.setDefaultModel(model);
-  }
-
   public synchronized DateMidnight getValue () {
 
     return (DateMidnight)getDefaultModelObject();

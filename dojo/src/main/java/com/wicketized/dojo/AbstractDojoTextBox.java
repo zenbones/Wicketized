@@ -2,6 +2,7 @@ package com.wicketized.dojo;
 
 import com.wicketized.extension.model.LazyModel;
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.model.IModel;
@@ -84,11 +85,6 @@ public abstract class AbstractDojoTextBox<D extends AbstractDojoTextBox<D>> exte
     this.trimModel.setWrappedModel(trimModel);
 
     return getDojoComponentClass().cast(this);
-  }
-
-  public D setDefaultModel (IModel<String> model) {
-
-    return getDojoComponentClass().cast(super.setDefaultModel(model));
   }
 
   public synchronized String getValue () {
