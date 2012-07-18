@@ -1,6 +1,5 @@
 package com.wicketized.dojo;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.model.IModel;
 
 public class DojoTitlePane extends DojoPane<DojoTitlePane> {
@@ -13,7 +12,7 @@ public class DojoTitlePane extends DojoPane<DojoTitlePane> {
   @Override
   public String getDojoType () {
 
-    return "dijit.Dialog";
+    return "dijit.TitlePane";
   }
 
   @Override
@@ -40,15 +39,5 @@ public class DojoTitlePane extends DojoPane<DojoTitlePane> {
   public DojoTitlePane setTitleModel (IModel<String> titleModel) {
 
     return (DojoTitlePane)super.setTitleModel(titleModel);
-  }
-
-  public void show (AjaxRequestTarget target) {
-
-    target.appendJavaScript("dijit.byId('" + getMarkupId() + "').show()");
-  }
-
-  public void hide (AjaxRequestTarget target) {
-
-    target.prependJavaScript("dijit.byId('" + getMarkupId() + "').hide()");
   }
 }
