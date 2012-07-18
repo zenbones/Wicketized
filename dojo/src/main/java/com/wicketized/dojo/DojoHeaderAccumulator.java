@@ -36,7 +36,7 @@ public class DojoHeaderAccumulator {
     LinkedList<String> requireList;
     StringBuilder contributionBuilder = new StringBuilder();
 
-    contributionBuilder.append("<script src=\"http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.xd.js\" djConfig=\"parseOnLoad: true\"></script>\n");
+    contributionBuilder.append("<script src=\"http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js\" djConfig=\"parseOnLoad: true\"></script>\n");
     contributionBuilder.append("<script type=\"text/javascript\">\n");
 
     requireList = new LinkedList<String>(DOJO_TYPE_SET_LOCAL.get());
