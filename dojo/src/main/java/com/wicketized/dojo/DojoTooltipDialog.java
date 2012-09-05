@@ -39,7 +39,7 @@ public class DojoTooltipDialog extends DojoMarkup<DojoTooltipDialog> implements 
 
     checkComponentTag(tag, "div");
 
-    tag.put("dojoType", "dijit.TooltipDialog");
+    tag.put("dojoType", getDojoType());
 
     super.onComponentTag(tag);
   }
