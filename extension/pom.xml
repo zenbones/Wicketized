@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.wicketized</groupId>
     <artifactId>wicketized</artifactId>
-    <version>0.8</version>
+    <version>0.9-SNAPSHOT</version>
   </parent>
   <artifactId>wicketized-extension</artifactId>
   <name>Extension</name>

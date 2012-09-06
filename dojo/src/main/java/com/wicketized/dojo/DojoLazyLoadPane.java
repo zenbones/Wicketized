@@ -12,7 +12,7 @@ import org.apache.wicket.request.IRequestHandler;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.handler.resource.ResourceReferenceRequestHandler;
 
-public abstract class DojoLazyLoadPane extends DojoMarkup<DojoLazyLoadPane> implements RenderBodyOnly {
+public abstract class DojoLazyLoadPane extends DojoMarkup<DojoLazyLoadPane> {
 
   public static final String LAZY_LOAD_COMPONENT_ID = "content";
 
