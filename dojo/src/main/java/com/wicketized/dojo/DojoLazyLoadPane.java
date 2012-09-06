@@ -37,9 +37,9 @@ public abstract class DojoLazyLoadPane extends DojoPanel<DojoLazyLoadPane> {
         if (stateRef.compareAndSet(State.PRE_RENDER, State.COMPLETED) | stateRef.compareAndSet(State.LOADING, State.COMPLETED)) {
           DojoLazyLoadPane.this.getPage().dirty();
           DojoLazyLoadPane.this.replace(getLazyLoadComponent(LAZY_LOAD_COMPONENT_ID));
-        }
 
-        target.add(DojoLazyLoadPane.this);
+          target.add(DojoLazyLoadPane.this);
+        }
       }
 
       @Override
