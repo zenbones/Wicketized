@@ -5,7 +5,6 @@ import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.IRequestHandler;
@@ -28,37 +27,18 @@ public abstract class DojoLazyLoadPane extends DojoPanel<DojoLazyLoadPane> {
   public DojoLazyLoadPane (final String id, final IModel<?> model) {
 
     super(id, model);
-
-    add(new AbstractDefaultAjaxBehavior() {
-
-      @Override
-      protected void respond (final AjaxRequestTarget target) {
-
-        if (stateRef.compareAndSet(State.PRE_RENDER, State.COMPLETED) | stateRef.compareAndSet(State.LOADING, State.COMPLETED)) {
-          DojoLazyLoadPane.this.getPage().dirty();
-          DojoLazyLoadPane.this.replace(getLazyLoadComponent(LAZY_LOAD_COMPONENT_ID));
-
-          target.add(DojoLazyLoadPane.this);
-        }
-      }
-
-      @Override
-      public void renderHead (final Component component, final IHeaderResponse response) {
-
-        super.renderHead(component, response);
-
-        if (!stateRef.equals(State.COMPLETED)) {
-          handleCallbackScript(response, getCallbackScript().toString());
-        }
-      }
-    });
   }
 
   public abstract Component getLazyLoadComponent (String markupId);
 
-  protected void handleCallbackScript (final IHeaderResponse response, final String callbackScript) {
+  public void loadPanel (AjaxRequestTarget target) {
 
-    response.renderOnDomReadyJavaScript(callbackScript);
+    if (stateRef.compareAndSet(State.PRE_RENDER, State.COMPLETED) | stateRef.compareAndSet(State.LOADING, State.COMPLETED)) {
+      DojoLazyLoadPane.this.getPage().dirty();
+      DojoLazyLoadPane.this.replace(getLazyLoadComponent(LAZY_LOAD_COMPONENT_ID));
+
+      target.add(DojoLazyLoadPane.this);
+    }
   }
 
   @Override
