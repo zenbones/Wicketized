@@ -1,6 +1,6 @@
 package com.wicketized.dojo;
 
-public class DojoAccordionContainer extends DojoStackContainer<DojoAccordionContainer> {
+public abstract class DojoAccordionContainer extends DojoStackContainer<DojoAccordionContainer> {
 
   public DojoAccordionContainer (String id) {
 

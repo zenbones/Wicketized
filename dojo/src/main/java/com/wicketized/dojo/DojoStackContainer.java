@@ -17,6 +17,8 @@ public abstract class DojoStackContainer<D extends DojoStackContainer<D>> extend
     add(new DojoSubscribeOnRenderAjaxBehavior(getMarkupId() + "-selectChild"));
   }
 
+  public abstract void childSelected (AjaxRequestTarget target);
+
   @Override
   public String getCallbackPreScript () {
 
@@ -33,10 +35,10 @@ public abstract class DojoStackContainer<D extends DojoStackContainer<D>> extend
   public synchronized void onUpdate (AjaxRequestTarget target) {
 
     if ((selectedIndex = Integer.parseInt(RequestCycle.get().getRequest().getQueryParameters().getParameterValue(getMarkupId() + ".selectedChildIndex").toString())) < 0) {
+      selectedIndex = -1;
       selectedChild = null;
     }
     else {
-
       String divId = RequestCycle.get().getRequest().getQueryParameters().getParameterValue(getMarkupId() + ".selectedChildId").toString();
       boolean found = false;
 
@@ -49,9 +51,13 @@ public abstract class DojoStackContainer<D extends DojoStackContainer<D>> extend
       }
 
       if (!found) {
+        selectedIndex = -1;
+        selectedChild = null;
         throw new WicketRuntimeException("Unable to locate ContentPane with inner div id=" + divId);
       }
     }
+
+    childSelected(target);
   }
 
   public synchronized int getSelectedIndex () {
