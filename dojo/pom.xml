@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.wicketized</groupId>
     <artifactId>wicketized</artifactId>
-    <version>0.9-SNAPSHOT</version>
+    <version>0.9</version>
   </parent>
   <artifactId>wicketized-dojo</artifactId>
   <name>Dojo</name>
