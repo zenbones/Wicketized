@@ -6,7 +6,7 @@ import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 public abstract class AbstractDojoAjaxBehavior extends AbstractDefaultAjaxBehavior {
 
   @Override
-  protected CharSequence getCallbackScript () {
+  public CharSequence getCallbackScript () {
 
     String prescript;
 

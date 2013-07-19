@@ -5,6 +5,7 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 public class DojoNumberSpinner extends AbstractDojoValidationTextBox<DojoNumberSpinner> {
 
@@ -54,7 +55,7 @@ public class DojoNumberSpinner extends AbstractDojoValidationTextBox<DojoNumberS
   @Override
   protected void onComponentTag (final ComponentTag tag) {
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("smallDelta") != null) {
         smallDeltaModel.setObject(Integer.parseInt(tag.getAttribute("smallDelta")));
       }

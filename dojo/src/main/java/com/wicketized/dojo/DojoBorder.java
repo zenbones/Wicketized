@@ -6,8 +6,10 @@ import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.StringHeaderItem;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 public abstract class DojoBorder<D extends DojoBorder<D>> extends ModelAwareDojoBorder implements DojoComponent<D> {
 
@@ -56,7 +58,7 @@ public abstract class DojoBorder<D extends DojoBorder<D>> extends ModelAwareDojo
 
     super.renderHead(response);
 
-    response.renderString(DojoHeaderAccumulator.getHeaderContribution());
+    response.render(StringHeaderItem.forString(DojoHeaderAccumulator.getHeaderContribution()));
   }
 
   @Override
@@ -70,7 +72,7 @@ public abstract class DojoBorder<D extends DojoBorder<D>> extends ModelAwareDojo
   @Override
   protected void onComponentTag (final ComponentTag tag) {
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("intermediateChanges") != null) {
         intermediateChangesModel.setObject(Boolean.parseBoolean(tag.getAttribute("intermediateChanges")));
       }
@@ -94,7 +96,7 @@ public abstract class DojoBorder<D extends DojoBorder<D>> extends ModelAwareDojo
       removeIntermediateChangeBehavior();
     }
 
-    if ((target = AjaxRequestTarget.get()) != null) {
+    if ((target = RequestCycle.get().find(AjaxRequestTarget.class)) != null) {
       DojoConstructionManager.mark(this, target);
     }
     else {

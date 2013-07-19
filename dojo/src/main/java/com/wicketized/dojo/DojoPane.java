@@ -5,6 +5,7 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 public abstract class DojoPane<D extends DojoPane<D>> extends DojoBorder<D> implements RenderBodyOnly {
 
@@ -34,7 +35,7 @@ public abstract class DojoPane<D extends DojoPane<D>> extends DojoBorder<D> impl
 
     checkComponentTag(tag, "div");
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("closable") != null) {
         closableModel.setObject(Boolean.parseBoolean(tag.getAttribute("closable")));
       }
@@ -53,7 +54,7 @@ public abstract class DojoPane<D extends DojoPane<D>> extends DojoBorder<D> impl
 
     super.onBeforeRender();
 
-    if ((this instanceof DojoLayoutContainer) && ((target = AjaxRequestTarget.get()) != null)) {
+    if ((this instanceof DojoLayoutContainer) && ((target = RequestCycle.get().find(AjaxRequestTarget.class)) != null)) {
       target.appendJavaScript("dijit.byId('" + getMarkupId() + "').startup();dijit.byId('" + getMarkupId() + "').resize()");
     }
   }

@@ -62,7 +62,7 @@ public class DojoCheckBox extends DojoFormMarkup<DojoCheckBox> {
     checkComponentTag(tag, "input");
     checkComponentTagAttribute(tag, "type", "checkbox");
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("checked") != null) {
         checkedModel.setObject(true);
       }

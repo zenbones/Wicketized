@@ -91,7 +91,7 @@ public abstract class AbstractDojoValidationTextBox<D extends AbstractDojoValida
   @Override
   protected void onComponentTag (final ComponentTag tag) {
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("constraints") != null) {
         constraintsModel.setObject(tag.getAttribute("constraints"));
       }

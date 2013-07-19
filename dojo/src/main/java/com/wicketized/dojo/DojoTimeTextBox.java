@@ -61,7 +61,7 @@ public class DojoTimeTextBox extends DojoFormMarkup<DojoTimeTextBox> {
     checkComponentTag(tag, "input");
     checkComponentTagAttribute(tag, "type", "text");
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("value") != null) {
         setValue(TimeConversionModel.parseTime(tag.getAttribute("value")));
       }

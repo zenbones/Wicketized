@@ -76,7 +76,7 @@ public class DojoVerticalSlider extends DojoFormBorder<DojoVerticalSlider> imple
 
     checkComponentTag(tag, "ol");
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("showButtons") != null) {
         showButtonsModel.setObject(Boolean.parseBoolean(tag.getAttribute("showButtons")));
       }

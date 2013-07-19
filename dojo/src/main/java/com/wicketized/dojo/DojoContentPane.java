@@ -5,6 +5,7 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 public class DojoContentPane extends DojoPane<DojoContentPane> {
 
@@ -32,7 +33,7 @@ public class DojoContentPane extends DojoPane<DojoContentPane> {
   @Override
   protected void onComponentTag (final ComponentTag tag) {
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("selected") != null) {
         selectedModel.setObject(Boolean.parseBoolean(tag.getAttribute("selected")));
       }

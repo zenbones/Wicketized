@@ -59,7 +59,7 @@ public class DojoProgressBar extends DojoFormMarkup<DojoProgressBar> {
 
     checkComponentTag(tag, "div");
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("places") != null) {
         placesModel.setObject(Integer.parseInt(tag.getAttribute("places")));
       }

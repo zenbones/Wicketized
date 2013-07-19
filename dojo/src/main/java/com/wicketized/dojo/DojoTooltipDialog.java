@@ -2,6 +2,7 @@ package com.wicketized.dojo;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 public class DojoTooltipDialog extends DojoMarkup<DojoTooltipDialog> implements DojoTyped {
 
@@ -51,7 +52,7 @@ public class DojoTooltipDialog extends DojoMarkup<DojoTooltipDialog> implements 
 
     super.onBeforeRender();
 
-    if ((this instanceof DojoLayoutContainer) && ((target = AjaxRequestTarget.get()) != null)) {
+    if ((this instanceof DojoLayoutContainer) && ((target = RequestCycle.get().find(AjaxRequestTarget.class)) != null)) {
       target.appendJavaScript("dijit.byId('" + getMarkupId() + "').startup();dijit.byId('" + getMarkupId() + "').resize()");
     }
   }

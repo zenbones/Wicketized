@@ -5,6 +5,7 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 public class DojoDropDownButton extends DojoBorder<DojoDropDownButton> implements RenderBodyOnly, DojoAjaxUpdating, DojoDropDownContainer {
 
@@ -66,7 +67,7 @@ public class DojoDropDownButton extends DojoBorder<DojoDropDownButton> implement
 
     checkComponentTag(tag, "button");
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("iconClass") != null) {
         iconClassModel.setObject(tag.getAttribute("iconClass"));
       }

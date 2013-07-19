@@ -2,7 +2,9 @@ package com.wicketized.dojo;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 public class DojoUpdateOnRenderAjaxBehavior extends AbstractDojoAjaxBehavior {
 
@@ -24,7 +26,7 @@ public class DojoUpdateOnRenderAjaxBehavior extends AbstractDojoAjaxBehavior {
 
     super.renderHead(component, response);
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
 
       StringBuilder javascriptBuilder;
       StringBuilder idBuilder;
@@ -32,7 +34,7 @@ public class DojoUpdateOnRenderAjaxBehavior extends AbstractDojoAjaxBehavior {
       javascriptBuilder = new StringBuilder("dojo.addOnLoad(function() {").append(getCallbackScript()).append("})");
       idBuilder = new StringBuilder(DojoUpdateOnRenderAjaxBehavior.class.getName()).append(".ajax.").append(component.getMarkupId()).append('.').append(purpose);
 
-      response.renderJavaScript(javascriptBuilder.toString(), idBuilder.toString());
+      response.render(JavaScriptHeaderItem.forScript(javascriptBuilder.toString(), idBuilder.toString()));
     }
   }
 
@@ -43,7 +45,7 @@ public class DojoUpdateOnRenderAjaxBehavior extends AbstractDojoAjaxBehavior {
 
     super.beforeRender(component);
 
-    if ((target = AjaxRequestTarget.get()) != null) {
+    if ((target = RequestCycle.get().find(AjaxRequestTarget.class)) != null) {
       target.appendJavaScript(getCallbackScript());
     }
   }

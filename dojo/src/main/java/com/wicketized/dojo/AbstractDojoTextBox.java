@@ -55,7 +55,7 @@ public abstract class AbstractDojoTextBox<D extends AbstractDojoTextBox<D>> exte
     checkComponentTag(tag, "input");
     checkComponentTagAttribute(tag, "type", "text");
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("trim") != null) {
         trimModel.setObject(Boolean.parseBoolean(tag.getAttribute("trim")));
       }

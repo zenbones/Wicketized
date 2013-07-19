@@ -3,7 +3,9 @@ package com.wicketized.dojo;
 import java.util.LinkedList;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 public class DojoSubscribeOnRenderAjaxBehavior extends AbstractDojoAjaxBehavior {
 
@@ -28,7 +30,7 @@ public class DojoSubscribeOnRenderAjaxBehavior extends AbstractDojoAjaxBehavior 
 
     super.renderHead(component, response);
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
 
       StringBuilder javascriptBuilder;
       StringBuilder idBuilder;
@@ -36,7 +38,7 @@ public class DojoSubscribeOnRenderAjaxBehavior extends AbstractDojoAjaxBehavior 
       javascriptBuilder = new StringBuilder("dojo.addOnLoad(function() {dojo.subscribe('").append(topic).append("', function(pane){").append(getCallbackScript()).append("})})");
       idBuilder = new StringBuilder(DojoSubscribeOnRenderAjaxBehavior.class.getName()).append(".listener.").append(component.getMarkupId()).append('.').append(topic);
 
-      response.renderJavaScript(javascriptBuilder.toString(), idBuilder.toString());
+      response.render(JavaScriptHeaderItem.forScript(javascriptBuilder.toString(), idBuilder.toString()));
     }
   }
 

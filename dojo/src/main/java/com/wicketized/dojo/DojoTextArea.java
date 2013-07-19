@@ -58,7 +58,7 @@ public class DojoTextArea extends DojoFormBorder<DojoTextArea> implements Render
 
     checkComponentTag(tag, "textarea");
 
-    if (AjaxRequestTarget.get() == null) {
+    if (RequestCycle.get().find(AjaxRequestTarget.class) == null) {
       if (tag.getAttribute("trim") != null) {
         trimModel.setObject(Boolean.parseBoolean(tag.getAttribute("trim")));
       }

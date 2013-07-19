@@ -11,7 +11,7 @@ public abstract class AbstractDojoOnEventAjaxBehavior extends AjaxEventBehavior 
   }
 
   @Override
-  protected CharSequence getCallbackScript () {
+  public CharSequence getCallbackScript () {
 
     String prescript;
 
